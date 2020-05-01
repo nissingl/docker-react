@@ -1,0 +1,23 @@
+version: '3'
+services: 
+    web: 
+        stdin_open: true
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+            # Above one is the issue recently discovered
+        ports: 
+            - "3000:3000"
+            # outsode:inside always
+        volumes: 
+            - /app/node_modules
+            - .:/app
+    tests: 
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+            # Above one is the issue recently discovered
+        volumes: 
+            - /app/node_modules
+            - .:/app
+        command: ["yarn", "test"]
