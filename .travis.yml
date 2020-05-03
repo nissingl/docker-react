@@ -8,3 +8,15 @@ before_install:
 
 script:
     - docker run -e CI=true nishantsingla/docker-react yarn test
+
+deploy:
+    provider: elasticbeanstalk
+    region: "us-west-2"
+    app: "docker-react-sample"
+    env: "DockerReactSample-env"
+    bucket_name: "elasticbeanstalk-us-west-2-250220717051"
+    bucket_path: "docker-react-sample"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
