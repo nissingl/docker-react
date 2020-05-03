@@ -1,0 +1,10 @@
+language: generic 
+sudo: required
+servies:
+    - docker
+
+before_install:
+    - docker build -t nishantsingla/docker-react -f Dockerfile.dev . 
+
+script:
+    - docker run -e CI=true nishantsingla/docker-react yarn test
